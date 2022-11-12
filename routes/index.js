@@ -1,8 +1,8 @@
 let router = require("express").Router()
 
 /* GET home page. */
-let user = require("./user")
-router.use("/user", user)
+let user = require("./users")
+router.use("/users", user)
 
 
 module.exports = router;
