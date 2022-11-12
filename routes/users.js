@@ -2,6 +2,6 @@ let router = require("express").Router()
 
 let {create} = require("../controllers/user")
 
-router.router("/").post(create)
+router.route("/").post(create)
 
 module.exports = router;
