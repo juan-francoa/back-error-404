@@ -33,7 +33,6 @@ const controller = {
                     array = array.filter(e=> e.continent.toLowerCase().includes(query.continent.toLowerCase()) )
                 }
             }
-           
             if (array) {
                 res.status(200).json({
                     response: array,
@@ -52,6 +51,32 @@ const controller = {
                 message: error.message
             })
         }        
+    },
+    readOne: async (req, res) => {
+
+        let { id } = req.params
+
+        try {
+            let city = await City.findOne({ _id: id }).populate({ path: 'userId', select: 'name photo -_id' });
+
+            if (city) {
+                res.status(200).json({
+                    success: true,
+                    message: 'City found',
+                    data: city,
+                });
+            } else {
+                res.status(404).json({
+                    success: false,
+                    message: 'City not found',
+                });
+            }
+        } catch (error) {
+            res.status(400).json({
+                success: false,
+                message: error.message,
+            });
+        }
     },
 }
 
