@@ -14,7 +14,7 @@ const controller = {
 
         try {
             let allItineraries = await Itinerary.find(query);
-            if (allItineraries) {
+            if (allItineraries.length) {
                 res.status(200).json({
                     success: true,
                     message: 'All itineraries',
