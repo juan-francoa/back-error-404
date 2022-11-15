@@ -6,9 +6,9 @@ const controller = {
     read: async (req, res) => {
 
         let query = {};
-        if (req.query.cityId) {
+        if (req.query.itineraryId) {
             query = {
-                cityId: req.query.cityId
+                itineraryId: req.query.itineraryId
             };
         }
 
@@ -42,6 +42,29 @@ const controller = {
                 message: 'Itinerary created',
             });
         } catch (error) {
+            res.status(400).json({
+                success: false,
+                message: error.message,
+            });
+        }
+    },
+    update: async (req, res) => {
+        let { id } = req.params;
+        try {
+            let itinerary = await Itinerary.findOneAndUpdate({ _id: id }, req.body, { new: true });
+            if(itinerary){
+                res.status(200).json({
+                    success: true,
+                    message: 'Itinerary updated',
+                    data: itinerary,
+                });
+            }else{
+                res.status(404).json({
+                    success: false,
+                    message: 'Itinerary not found',
+                });
+            }
+        }catch (error) {
             res.status(400).json({
                 success: false,
                 message: error.message,
