@@ -48,6 +48,31 @@ const controller = {
             })
         }
     },
+    update: async (req, res) => {
+        let { id } = req.params;
+
+        try {
+            let oneShow = await Show.findOneAndUpdate({ _id: id }, req.body, { new: true });
+            if (oneShow) {
+                res.status(200).json({
+                    success: true,
+                    message: 'Show succesfully updated',
+                    data: oneShow,
+                });
+            } else {
+                res.status(404).json({
+                    success: false,
+                    message: 'Show not found',
+                });
+            }
+        } catch (error) {
+            res.status(400).json({
+                success: false,
+                message: error.message,
+            });
+        }
+    },
+
 
 }
 
