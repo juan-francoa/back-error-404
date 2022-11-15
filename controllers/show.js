@@ -72,7 +72,30 @@ const controller = {
             });
         }
     },
+    destroyOne: async (req, res) => {
+        let { id } = req.params;
 
+        try {
+            let show = await Show.findOneAndDelete({ _id: id });
+            if (show) {
+                res.status(200).json({
+                    success: true,
+                    message: 'Show deleted',
+                    data: show,
+                });
+            } else {
+                res.status(404).json({
+                    success: false,
+                    message: 'Show not found',
+                });
+            }
+        } catch (error) {
+            res.status(400).json({
+                success: false,
+                message: error.message,
+            });
+        }
+    },
 
 }
 
