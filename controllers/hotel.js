@@ -28,7 +28,7 @@ const controller = {
             };
         }
         if (req.query.order) {
-            order = { name: req.query.order }
+            order = { capacity: req.query.order }
         }
 
         try {

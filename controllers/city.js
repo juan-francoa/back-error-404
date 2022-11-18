@@ -25,12 +25,14 @@ const controller = {
         try {
             let todos = await City.find()
             let array = todos
+            console.log(query, todos)
             for(let name in query){
                 if( name === "name"){
-                    array = array.filter(e=>e.name.toLowerCase().includes(query.name.toLowerCase()))
+                    array = array.filter(e=> e.name.toLowerCase().includes(query.name.toLowerCase()))
                 }
                 if( name === "continent"){
-                    array = array.filter(e=> e.continent.toLowerCase().includes(query.continent.toLowerCase()) )
+                    if(query.continent.length)
+                    {array = array.filter(e=>  query.continent.toLowerCase().includes(e.continent.toLowerCase()) )}
                 }
             }
             if (array) {
