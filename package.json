@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "test-user": "mocha --timeout 1000000000 ./test/user.test.js"
+    "test-cities": "mocha --timeout 1000000000 ./test/cities.test.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
