@@ -6,7 +6,8 @@
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "test-cities": "mocha --timeout 10000 ./test/cities.test.js",
-    "test-hotels": "mocha --timeout 10000 ./test/hotels.test.js"
+    "test-hotels": "mocha --timeout 10000 ./test/hotels.test.js",
+    "test-newcities": "mocha --timeout 10000 ./test/newcities.test.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -16,9 +17,11 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "joi": "^17.7.0",
     "mongoose": "^6.7.2",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "sweetalert2": "^11.6.11"
   },
   "devDependencies": {
     "chai": "^4.3.7",
