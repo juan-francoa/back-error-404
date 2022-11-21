@@ -33,7 +33,7 @@ const controller = {
 
         try {
             let allHotels = await Hotel.find(query).sort(order)
-            if (allHotels) {
+            if (allHotels.length) {
                 res.status(200).json({
                     response: allHotels,
                     success: true,
@@ -41,7 +41,8 @@ const controller = {
                 })
             } else {
                 res.status(404).json({
-                    success: false,
+                    response: allHotels,
+                    success: true,
                     message: "hotels not found"
                 })
             }
