@@ -12,8 +12,14 @@ const controller = {
                 hotelId: req.query.hotelId
             };
         }
+        if (req.query.user_id) {
+            query = { user_id: req.query.user_id }
+        }
         try {
             let allShows = await (await Show.find(query));
+            if(query.user_id){
+                allShows = allShows.filter(e => e.userId == query.user_id)
+            }
             if (allShows.length) {
                 res.status(200).json({
                     success: true,
