@@ -11,9 +11,15 @@ const controller = {
                 itineraryId: req.query.itineraryId
             };
         }
-
+        if (req.query.user_id) {
+            query = { user_id: req.query.user_id }
+        }
+        
         try {
             let allItineraries = await Itinerary.find(query);
+            if(query.user_id){
+                allItineraries = allItineraries.filter(e => e.userId == query.user_id)
+            }
             if (allItineraries.length) {
                 res.status(200).json({
                     success: true,
