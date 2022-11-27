@@ -48,9 +48,10 @@ const controller = {
         try {
             const verifyPassword = bcryptjs.compareSync(password, user.password)
             if (verifyPassword) {
-                const userDb = await User.findOneAndUpdate({ _id: user._id }, { logged: true },{new:true})
+                const userDb = await User.findOneAndUpdate({ _id: user._id }, { logged: true }, { new: true })
                 const token = jwt.sign(
-                    {   _id: userDb._id,
+                    {
+                        _id: userDb._id,
                         name: userDb.name,
                         photo: userDb.photo,
                         logged: userDb.logged
@@ -59,7 +60,14 @@ const controller = {
                     { expiresIn: 60 * 60 * 24 }
                 )
                 return res.status(200).json({
-                    response: { user, token },
+                    response: {
+                        user: {
+                            _id: userDb._id,
+                            name: userDb.name,
+                            photo: userDb.photo,
+                            logged: userDb.logged
+                        }, token
+                    },
                     success: true,
                     message: "welcome " + user.name
                 })
