@@ -114,6 +114,49 @@ const controller = {
         catch (error) {
             next (error)
         }
+    },
+    verMisDatos: async (req, res, next) => {
+        const id = req.params.id
+
+        try{
+            let verMisDatos = await User.findOne ({_id:id})
+            if (verMisDatos) {
+                res.status(200).json({
+                    response: verMisDatos,
+                    success: true,
+                    message: "user find"
+            })
+        }
+            else{
+                res.status(404).json({
+                success: false,
+                message: "user not find"
+            })} 
+        }
+        catch (error){
+            next (error)
+        }
+    },
+    editarMisDatos: async (req, res, next) => {
+        const id = req.params.id
+        try{
+            let editarMisDatos = await User.findOneAndUpdate ({_id: id}, req.body, {new: true})
+            if (editarMisDatos) {
+                res.status(200).json({
+                    response: editarMisDatos,
+                    success: true,
+                    message: "user edit"
+            })
+        }
+            else{
+                res.status(404).json({
+                success: false,
+                message: "user not edit"
+            })} 
+        }
+        catch (error){
+            next (error)
+        }
     }
 }
 
