@@ -30,10 +30,16 @@ const controller = {
         if (req.query.order) {
             order = { capacity: req.query.order }
         }
+        if (req.query.user_id) {
+            query = { user_id: req.query.user_id }
+        }
 
         try {
             let allHotels = await Hotel.find(query).sort(order)
-            if (allHotels) {
+            if(req.query.user_id){
+                allHotels = allHotels.filter(e => e.userId == query.user_id)
+            }
+            if (allHotels.length) {
                 res.status(200).json({
                     response: allHotels,
                     success: true,
@@ -41,7 +47,8 @@ const controller = {
                 })
             } else {
                 res.status(404).json({
-                    success: false,
+                    response: allHotels,
+                    success: true,
                     message: "hotels not found"
                 })
             }

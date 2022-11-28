@@ -25,7 +25,9 @@ const controller = {
         try {
             let todos = await City.find()
             let array = todos
-            console.log(query, todos)
+            if(query.user_id){
+                array = todos.filter(e => e.userId == query.user_id)
+            }
             for(let name in query){
                 if( name === "name"){
                     array = array.filter(e=> e.name.toLowerCase().includes(query.name.toLowerCase()))
@@ -128,6 +130,7 @@ const controller = {
             });
         }
     },
+
 }
 
 module.exports = controller
