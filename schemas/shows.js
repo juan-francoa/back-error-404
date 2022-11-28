@@ -44,7 +44,7 @@ const schemaShows = joi.object({
             "number.empty": "The field 'Price' is required, please enter it.",
         }),
     date: joi
-        .date()
+        .number()
         .required()
         .messages({
             "any.required": "The field 'Date' is required, please enter it.",
