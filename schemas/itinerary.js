@@ -8,7 +8,6 @@ const schemaItinerary = joi.object({
             "string.empty": "User ID is required.",
             "any.required": "User ID is required."
         }),
-
     name: joi
         .string()
         .required()
