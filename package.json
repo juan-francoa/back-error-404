@@ -8,7 +8,8 @@
     "test-cities": "mocha --timeout 10000 ./test/cities.test.js",
     "test-hotels": "mocha --timeout 10000 ./test/hotels.test.js",
     "test-newhotels": "mocha --timeout 10000 ./test/newhotels.test.js",
-    "test-newcities": "mocha --timeout 10000 ./test/newcities.test.js"
+    "test-newcities": "mocha --timeout 10000 ./test/newcities.test.js",
+    "test-itineraries": "mocha --timeout 10000 ./test/itineraries.test.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
