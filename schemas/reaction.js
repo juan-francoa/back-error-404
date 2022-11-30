@@ -35,15 +35,7 @@ const joi = require('joi');
               "any.required": "The field iconBack is required, please enter it.",
               "string.base": "Enter the photo of the show, please.",
               'string.empty': "The field iconBack is required, please enter it."
-          }),
-      
-      userId: joi
-          .string()
-          .required()
-          .messages({
-              "string.empty": "User ID is required.",
-              "any.required": "User ID is required."
-          }),
+          })
   });
   
   module.exports = schemaReaction;
