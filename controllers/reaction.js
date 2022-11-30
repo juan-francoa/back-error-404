@@ -25,10 +25,38 @@ const controller = {
 
     update: async (req, res) => {
 
-        let {itineraryId, name} = req.params;
-
+        let {query} = req;
+        let userId = req.user._id
         try{
-            let oneReaction = await Reaction.findByIdAndUpdate({_id: itineraryId}, req.body, {new: true});
+            let itinerary = await Reaction.find()
+            let busq = {}
+            for(let name in query){
+                if( name === "name"){
+                    if(query.name === "like"){
+                        itinerary = itinerary.filter(e=> e.icon == "https://img.icons8.com/material-outlined/2x/facebook-like--v2.png")
+                    }
+                    else if(query.name === "not-like"){
+                        itinerary = itinerary.filter(e=> e.icon == "https://img.icons8.com/material-outlined/2x/thumbs-down.png")
+                    }
+                    else if(query.name === "love"){
+                        itinerary = itinerary.filter(e=> e.icon == "https://img.icons8.com/material-outlined/512/hearts.png")
+                    }
+                    else if(query.name === "surprise"){
+                        itinerary = itinerary.filter(e=> e.icon == "https://img.icons8.com/material-outlined/2x/surprised.png")
+                    }
+                }
+                if( name === "itineraryId"){
+                    itinerary = itinerary.filter(e=>  e.itineraryId == query.itineraryId)
+                }
+            }
+      
+            if(!itinerary[0].userId.includes(userId)){
+               busq = {$push:{userId:userId}}
+            }
+            else{
+                busq = {$pull:{userId:userId}}
+            }
+            let oneReaction = await Reaction.findByIdAndUpdate({_id: itinerary[0]._id}, busq, {new: true});
             if (oneReaction) {
                 res.status(200).json({
                     success: true,
