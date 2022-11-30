@@ -49,9 +49,8 @@ const controller = {
                     itinerary = itinerary.filter(e=>  e.itineraryId == query.itineraryId)
                 }
             }
-      
             if(!itinerary[0].userId.includes(userId)){
-               busq = {$push:{userId:userId}}
+                busq = {$push:{userId:userId}}
             }
             else{
                 busq = {$pull:{userId:userId}}
@@ -70,8 +69,7 @@ const controller = {
                 });
             }
         }
-
-        catch (error) {
+        catch(error){
             res.status(400).json({
                 success: false,
                 message: error.message,
@@ -79,6 +77,32 @@ const controller = {
         }
 },
 
+    cantidadReactions: async (req, res) => {
+        let {query} = req;
+        try {
+            let reactions = await Reaction.find ()
+            reactions = reactions.filter(e=>  e.itineraryId == query.itineraryId)
+            if (reactions) {
+                res.status(200).json({
+                    success: true,
+                    message: 'Reactions length',
+                    data: reactions.length,
+                });
+            } else {
+                res.status(404).json({
+                    success: false,
+                    message: 'Reactions not length',
+                });
+            }
+
+        }
+        catch(error){
+            res.status(400).json({
+                success: false,
+                message: error.message,
+            });
+        }
+    }    
 }
 
 module.exports = controller;
