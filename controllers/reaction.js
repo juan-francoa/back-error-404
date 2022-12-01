@@ -86,7 +86,7 @@ const controller = {
                 res.status(200).json({
                     success: true,
                     message: 'Reactions length',
-                    data: reactions.length,
+                    data: reactions,
                 });
             } else {
                 res.status(404).json({
