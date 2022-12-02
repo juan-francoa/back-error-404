@@ -122,6 +122,7 @@ const controller = {
             });
         }
     },
+    
     deleteReaction: async (req, res) => {
         let { id } = req.params
 

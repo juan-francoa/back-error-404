@@ -45,6 +45,55 @@ const controller = {
         }
     },
 
+    update: async (req, res) => {
+        let { id } = req.params;
+        try {
+            let comment = await Comment.findOneAndUpdate({ _id: id }, req.body, { new: true });
+            if(comment){
+                res.status(200).json({
+                    success: true,
+                    message: 'Comment updated',
+                    data: comment,
+                });
+            }else{
+                res.status(404).json({
+                    success: false,
+                    message: 'Comment not found',
+                });
+            }
+        }catch (error) {
+            res.status(400).json({
+                success: false,
+                message: error.message,
+            });
+        }
+    },
+
+    destroyOne: async (req, res) => {
+        let { id } = req.params;
+
+        try {
+            let comment = await Comment.findOneAndDelete({ _id: id });
+            if(comment){
+                res.status(200).json({
+                    success: true,
+                    message: 'Comment deleted',
+                    data: comment,
+                });
+            }else{
+                res.status(404).json({
+                    success: false,
+                    message: 'Comment not found',
+                });
+            }
+    }catch (error) {
+            res.status(400).json({
+                success: false,
+                message: error.message,
+            });
+        }
+    },
+
 }
 
 module.exports = controller
