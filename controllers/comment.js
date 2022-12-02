@@ -12,6 +12,7 @@ const controller = {
        
         try {
             let nuevo = await Comment.find()
+            .populate({ path: 'userId', select: 'name photo _id' })
             if(query.showId){
                 nuevo = nuevo.filter(e => e.showId == query.showId)
             }
